@@ -3,3 +3,4 @@
 function  gameInit() {
     alert("the game start!");
 }
+

@@ -4,7 +4,10 @@
     <meta charset="UTF-8">
     <title>Byte 2048</title>
     <link rel="stylesheet" href="css/style.css">
+
     <script type="text/javascript" src="js/animal.js"></script>
+    <script type="text/javascript" src="js/gameTable.js"></script>
+    <script type="text/javascript" src="js/grid.js"></script>
 </head>
 <body>
     <div id="big-div">
@@ -14,8 +17,8 @@
             <div id="top-div">
 
                 <div id="score-div">
-                    <div id="time-display"><p>分数：</p>&nbsp&nbsp<b>2048'</b></div>
-                    <div id="score-display"><p>时间：</p>&nbsp&nbsp<b>56s</b></div>
+                    <div id="time-display"><p>分数：</p>&nbsp&nbsp<b id="time">2048'</b></div>
+                    <div id="score-display"><p>时间：</p>&nbsp&nbsp<b id="score">56s</b></div>
                 </div>
                 <div id="menu-div">
                     <p>菜单：</p>
@@ -26,28 +29,28 @@
             <div id="game-contents">
                 <table id="table-game">
                     <tr>
-                        <td>5</td>
-                        <td>2</td>
-                        <td>4</td>
-                        <td>4</td>
+                        <td id="id1" class="typenone"></td>
+                        <td id="id2" class="type2">2</td>
+                        <td id="id3" class="type4">4</td>
+                        <td id="id4" class="type8">8</td>
                     </tr>
                     <tr>
-                        <td>8</td>
-                        <td>8</td>
-                        <td>8</td>
-                        <td>8</td>
+                        <td id="id5" class="typenone"></td>
+                        <td id="id6" class="type16">16</td>
+                        <td id="id7" class="type32">32</td>
+                        <td id="id8" class="type64">64</td>
                     </tr>
                     <tr>
-                        <td>16</td>
-                        <td>32</td>
-                        <td>16</td>
-                        <td>16</td>
+                        <td id="id9" class="typenone"></td>
+                        <td id="id10" class="type128">128</td>
+                        <td id="id11" class="type256">256</td>
+                        <td id="id12" class="type512">512</td>
                     </tr>
                     <tr>
-                        <td>32</td>
-                        <td>32</td>
-                        <td>128</td>
-                        <td>512</td>
+                        <td id="id13" class="type1024">1024</td>
+                        <td id="id14" class="type2048">2048</td>
+                        <td id="id15" class="type4">4</td>
+                        <td id="id16" class="type8">8</td>
                     </tr>
                 </table>
             </div>
@@ -58,9 +61,15 @@
                 <p>This is a computer 2048 game.</p>
                 <p>You can play the game by press some key in your keyborad.</p>
                 <p>Like this key: up,down,left and right.</p>
-
             </div>
+
         </div>
     </div>
 </body>
+
+<script>
+    var gt = new gametable();
+    gt.init();
+</script>
+
 </html>
