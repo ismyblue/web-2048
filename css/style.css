@@ -1,0 +1,87 @@
+*{
+    margin: 0;
+    border: 0;
+    padding: 0;
+}
+
+body{
+    background-color: aliceblue;
+}
+
+#big-div{
+    margin-top: 20px;
+    width: 100%;
+    height: 600px;
+    background: bisque;
+}
+
+#main-div{
+    margin: auto;
+    width: 30%;
+    height: 98%;
+    border: double 5px;
+}
+
+#top-div{
+    width: 100%;
+    height: 20%;
+    /*border: solid;*/
+}
+
+#score-div,#menu-div{
+    float: left;
+    width: 50%;
+    height: 100%;
+}
+
+#btn-start{
+    width: 50%;
+    height: 25px;
+    background: coral;
+    border: solid transparent 2px;
+    font-weight: 700;
+}
+#btn-start:hover,#btn-start:active{
+    background: transparent;
+    border: solid coral 2px;
+    outline: none;
+    color: coral;
+}
+input[type="button"]::-moz-focus-inner {
+    border:none
+}
+
+
+#score-display,#time-display{
+    width: 50%;
+    height: 50%;
+}
+
+#game-contents{
+    width: 100%;
+    height: 60%;
+}
+
+#table-game{
+    width: 100%;
+    height: 100%;
+    border: solid darkseagreen;
+    font-family: "AR PL UKai CN";
+    font-weight: 700;
+    font-size: 25px;
+    text-align: center;
+}
+td{
+    width: 25%;
+    height: 25%;
+    border: solid;
+}
+
+#foot-contents{
+    width: 100%;
+    height: 20%;
+}
+#foot-contents p{
+    text-indent: 2em;
+    line-height: 20px;
+}

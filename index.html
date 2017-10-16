@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Byte 2048</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script type="text/javascript" src="js/animal.js"></script>
+</head>
+<body>
+    <div id="big-div">
+        <!--主要内容-->
+        <div id="main-div">
+            <!--菜单栏-->
+            <div id="top-div">
+
+                <div id="score-div">
+                    <div id="time-display"><p>分数：</p>&nbsp&nbsp<b>2048'</b></div>
+                    <div id="score-display"><p>时间：</p>&nbsp&nbsp<b>56s</b></div>
+                </div>
+                <div id="menu-div">
+                    <p>菜单：</p>
+                    <input type="button" id="btn-start" value="Start" onclick="gameInit()"/>
+                </div>
+            </div>
+            <!--游戏区-->
+            <div id="game-contents">
+                <table id="table-game">
+                    <tr>
+                        <td>5</td>
+                        <td>2</td>
+                        <td>4</td>
+                        <td>4</td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td>8</td>
+                        <td>8</td>
+                        <td>8</td>
+                    </tr>
+                    <tr>
+                        <td>16</td>
+                        <td>32</td>
+                        <td>16</td>
+                        <td>16</td>
+                    </tr>
+                    <tr>
+                        <td>32</td>
+                        <td>32</td>
+                        <td>128</td>
+                        <td>512</td>
+                    </tr>
+                </table>
+            </div>
+
+            <!--解释区-->
+            <div id="foot-contents">
+                <h2>2048 Game</h2>
+                <p>This is a computer 2048 game.</p>
+                <p>You can play the game by press some key in your keyborad.</p>
+                <p>Like this key: up,down,left and right.</p>
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>
