@@ -5,9 +5,8 @@
     <title>Byte 2048</title>
     <link rel="stylesheet" href="css/style.css">
 
-
 </head>
-<body>
+<body onkeydown="canMove(event)">
     <div id="big-div">
         <!--主要内容-->
         <div id="main-div">
@@ -15,12 +14,12 @@
             <div id="top-div">
 
                 <div id="score-div">
-                    <div id="time-display"><p>分数：</p>&nbsp&nbsp<b id="time">2048'</b></div>
-                    <div id="score-display"><p>时间：</p>&nbsp&nbsp<b id="score">56s</b></div>
+                    <div id="time-display"><p>时间：</p>&nbsp&nbsp<b id="time">56s</b></div>
+                    <div id="score-display"><p>分数：</p>&nbsp&nbsp<b id="score">2048'</b></div>
                 </div>
                 <div id="menu-div">
                     <p>菜单：</p>
-                    <input type="button" id="btn-start" value="Start" onclick="gameInit()"/>
+                    <input type="button" id="btn-start" value="Start" onclick="gameStart()"/>
                 </div>
             </div>
             <!--游戏区-->
@@ -65,12 +64,33 @@
     </div>
 </body>
 
-<script type="text/javascript" src="js/animal.js"></script>
 <script type="text/javascript" src="js/gameTable.js"></script>
-<script type="text/javascript" src="js/grid.js"></script>
 <script>
     var gt = new gametable();
     gt.init("table-game",4,4);
+    function canMove(event) {
+        var e = window.event || event;
+        key = e.keyCode;
+        switch (key){
+            case 37:
+                gt.leftMove();
+                break;
+            case 38:
+                gt.upMove();
+                break;
+            case 39:
+                gt.rightMove();
+                break;
+            case 40:
+                gt.downMove();
+                break;
+            default :
+                break;
+        }
+    }
+    function gameStart() {
+        gt.init("table-game",4,4);
+    }
 </script>
 
 </html>

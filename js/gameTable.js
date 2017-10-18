@@ -23,9 +23,9 @@ grid.prototype.show = function (tableid) {
     var td = document.getElementById(tableid).rows[this.rownum].cells[this.colnum];
     this.type = "type" + this.value.toString();
     td.setAttribute("class",this.type);
-    //if(this.value == 0)
-      //  return ;
-    td.innerHTML = this.value;
+    td.innerHTML = "";
+    if(this.value != 0)
+        td.innerHTML = this.value;
 
 }
 
@@ -52,6 +52,7 @@ gametable.prototype.init = function(id,rowsum,colsum){
 
     //创建一个游戏表格
     var contetns = document.getElementById("game-contents");
+    contetns.innerHTML = "";
     var tb = document.createElement("table");
     tb.setAttribute("id","table-game");
     contetns.appendChild(tb);
@@ -69,57 +70,197 @@ gametable.prototype.init = function(id,rowsum,colsum){
     for(var i = 0;i < rowsum;i++){
         this.gameGrid[i] = new Array(colsum);
     }
-    var num = 1;
+
     for(var i = 0;i < rowsum;i++){
         for(var j = 0;j < colsum;j++){
             this.gameGrid[i][j] = new grid();
             this.gameGrid[i][j].rownum = i;
             this.gameGrid[i][j].colnum = j;
-            this.gameGrid[i][j].value = (num *= 2);
+            this.gameGrid[i][j].value = 0;
             this.gameGrid[i][j].show(this.id);
         }
     }
-
+    this.addRandom();
+    this.addRandom();
     //show
-    this.showTime();
-    this.showScore();
+    this.showGrid();
 }
 
-
-gametable.prototype.setScore = function (score) {
-    this.score = score;
-}
-
+//显示游戏分数
 gametable.prototype.showScore = function () {
-    document.getElementById("time").innerHTML = this.score + "'";
+    document.getElementById("score").innerHTML = this.score + "'";
 }
 
-gametable.prototype.setTime = function (time) {
-    this.time = time;
-}
-
+//显示游戏时间
 gametable.prototype.showTime = function () {
-    document.getElementById("score").innerHTML = this.score + "s";
+    document.getElementById("time").innerHTML = this.time + "s";
+}
+
+//显示游戏所有信息，图片，时间，分数
+gametable.prototype.showGrid = function () {
+    for(var i = 0;i < this.rowsum;i++){
+        for(var j = 0;j < this.colsum;j++){
+            this.gameGrid[i][j].show(this.id);
+        }
+    }
+    this.showScore();
+    this.showTime();
+}
+
+//增加一个随机数2
+gametable.prototype.addRandom = function () {
+    var i = Math.random() * 4 ;
+    var j = Math.random() * 4 ;
+    while(this.gameGrid[parseInt(i)][parseInt(j)].value != 0){
+        i = Math.random() * 4 ;
+        j = Math.random() * 4 ;
+    }
+    this.gameGrid[parseInt(i)][parseInt(j)].value = 2;
 }
 
 //游戏面板数字上移
 gametable.prototype.upMove = function(){
-
+    var i,j,k;
+    var test = false;//不能增加随机数
+    for(j = 0;j < this.colsum;j++){
+        var index = 0;
+        for(i = 0;i < this.rowsum ;i++){
+            if(this.gameGrid[i][j].value == 0){
+                continue;
+            }
+            for(k = i+1;k < this.rowsum;k++) {
+               if (this.gameGrid[i][j].value == this.gameGrid[k][j].value) {
+                   this.gameGrid[i][j].value = 0;
+                   this.gameGrid[index][j].value = this.gameGrid[k][j].value * 2;
+                   this.score += this.gameGrid[index][j].value;
+                   this.gameGrid[k][j].value = 0;
+                   index++;
+                   test = true;//可以增加随机数
+                   break;
+               }
+           }
+           if(k == this.rowsum){
+               var t = this.gameGrid[i][j].value;
+               this.gameGrid[i][j].value = 0;
+               this.gameGrid[index][j].value = t;
+               if(i != index){
+                   test = true;//可以增加随机数
+               }
+               index++;
+           }
+        }
+    }
+    if(test == true)
+        this.addRandom();
+    this.showGrid();
 }
 
 //游戏面板数字下移
 gametable.prototype.downMove = function(){
-
+    var i,j,k;
+    var test = false;
+    for(j = 0;j < this.colsum;j++){
+        var index = this.rowsum-1;
+        for(i = this.rowsum - 1;i >= 0 ;i--){
+            if(this.gameGrid[i][j].value == 0){
+                continue;
+            }
+            for(k = i-1;k >= 0;k--) {
+                if (this.gameGrid[i][j].value == this.gameGrid[k][j].value) {
+                    this.gameGrid[i][j].value = 0;
+                    this.gameGrid[index][j].value = this.gameGrid[k][j].value * 2;
+                    this.score += this.gameGrid[index][j].value;
+                    this.gameGrid[k][j].value = 0;
+                    test = true;//可以增加随机数
+                    index--;
+                    break;
+                }
+            }
+            if(k == -1){
+                var t = this.gameGrid[i][j].value;
+                this.gameGrid[i][j].value = 0;
+                this.gameGrid[index][j].value = t;
+                if(i != index)
+                    test = true;//可以增加随机数
+                index--;
+            }
+        }
+    }
+    if(test == true)
+        this.addRandom();
+    this.showGrid();
 }
 
 //游戏面板数字左移
 gametable.prototype.leftMove = function(){
-
+    var i,j,k;
+    var test = false;
+    for(i = 0;i < this.rowsum;i++){
+        var index = 0;
+        for(j = 0;j < this.colsum ;j++){
+            if(this.gameGrid[i][j].value == 0){
+                continue;
+            }
+            for(k = j+1;k < this.colsum;k++) {
+                if (this.gameGrid[i][j].value == this.gameGrid[i][k].value) {
+                    this.gameGrid[i][j].value = 0;
+                    this.gameGrid[i][index].value = this.gameGrid[i][k].value * 2;
+                    this.score += this.gameGrid[i][index].value;
+                    this.gameGrid[i][k].value = 0;
+                    tese = true;//可以增加随机数
+                    index++;
+                    break;
+                }
+            }
+            if(k == this.colsum){
+                var t = this.gameGrid[i][j].value;
+                this.gameGrid[i][j].value = 0;
+                this.gameGrid[i][index].value = t;
+                if(j != index)
+                    test = true;//可以增加随机数
+                index++;
+            }
+        }
+    }
+    if(test == true)
+        this.addRandom();
+    this.showGrid();
 }
 
 //游戏面板数字右移
-gametable.prototype.right = function(){
-
+gametable.prototype.rightMove = function() {
+    var i,j,k;
+    var test = false;
+    for(i = 0;i < this.rowsum;i++){
+        var index = this.colsum-1;
+        for(j = this.colsum-1;j >= 0;j--){
+            if(this.gameGrid[i][j].value == 0){
+                continue;
+            }
+            for(k = j-1;k >= 0;k--) {
+                if (this.gameGrid[i][j].value == this.gameGrid[i][k].value) {
+                    this.gameGrid[i][j].value = 0;
+                    this.gameGrid[i][index].value = this.gameGrid[i][k].value * 2;
+                    this.score += this.gameGrid[i][index].value;
+                    this.gameGrid[i][k].value = 0;
+                    test = true;
+                    index--;
+                    break;
+                }
+            }
+            if(k == -1){
+                var t = this.gameGrid[i][j].value;
+                this.gameGrid[i][j].value = 0;
+                this.gameGrid[i][index].value = t;
+                if(j != index)
+                    test = true;//可以增加随机数
+                index--;
+            }
+        }
+    }
+    if(test == true)
+        this.addRandom();
+    this.showGrid();
 }
 
 
