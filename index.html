@@ -5,9 +5,7 @@
     <title>Byte 2048</title>
     <link rel="stylesheet" href="css/style.css">
 
-    <script type="text/javascript" src="js/animal.js"></script>
-    <script type="text/javascript" src="js/gameTable.js"></script>
-    <script type="text/javascript" src="js/grid.js"></script>
+
 </head>
 <body>
     <div id="big-div">
@@ -27,21 +25,21 @@
             </div>
             <!--游戏区-->
             <div id="game-contents">
-                <table id="table-game">
+                <!--<table id="table-game">
                     <tr>
-                        <td id="id1" class="typenone"></td>
+                        <td id="id1" class="type0"></td>
                         <td id="id2" class="type2">2</td>
                         <td id="id3" class="type4">4</td>
                         <td id="id4" class="type8">8</td>
                     </tr>
                     <tr>
-                        <td id="id5" class="typenone"></td>
+                        <td id="id5" class="type0"></td>
                         <td id="id6" class="type16">16</td>
                         <td id="id7" class="type32">32</td>
                         <td id="id8" class="type64">64</td>
                     </tr>
                     <tr>
-                        <td id="id9" class="typenone"></td>
+                        <td id="id9" class="type0"></td>
                         <td id="id10" class="type128">128</td>
                         <td id="id11" class="type256">256</td>
                         <td id="id12" class="type512">512</td>
@@ -52,7 +50,7 @@
                         <td id="id15" class="type4">4</td>
                         <td id="id16" class="type8">8</td>
                     </tr>
-                </table>
+                </table>-->
             </div>
 
             <!--解释区-->
@@ -67,9 +65,12 @@
     </div>
 </body>
 
+<script type="text/javascript" src="js/animal.js"></script>
+<script type="text/javascript" src="js/gameTable.js"></script>
+<script type="text/javascript" src="js/grid.js"></script>
 <script>
     var gt = new gametable();
-    gt.init();
+    gt.init("table-game",4,4);
 </script>
 
 </html>
